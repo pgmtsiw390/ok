@@ -1,0 +1,42 @@
+name: KU seat watcher
+
+on:
+  schedule:
+    - cron: "0 * * * *"     # starts a run every hour; each run checks for ~55 min
+  workflow_dispatch:         # lets you start it by hand with "Run workflow"
+
+concurrency:
+  group: seat-watcher        # never run two at once
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests
+
+      - name: Load last seat counts
+        uses: actions/cache/restore@v4
+        with:
+          path: seat_state.json
+          key: seat-state-${{ github.run_id }}
+          restore-keys: seat-state-
+
+      - name: Watch seats for 55 minutes
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python banner_seat_watcher.py --minutes 55
+
+      - name: Save last seat counts
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: seat_state.json
+          key: seat-state-${{ github.run_id }}
