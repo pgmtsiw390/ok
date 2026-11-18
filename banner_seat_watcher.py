@@ -13,7 +13,7 @@ BANNER_BASE = "https://studentregistration.ku.ac.ae/StudentRegistrationSsb"
 TERM = "202620"          # Spring 2027
 
 # CRNs to watch. Add more like: ["20009", "20010"]
-CRNS = ["20009", "20001"]         # AERO 225-02 Mechanics of Solids
+CRNS = ["20009"]         # AERO 225-02 Mechanics of Solids
 
 NTFY_TOPIC = "s-ku-aero-8241"   # same topic you subscribe to in ntfy
 CHECK_EVERY_SECONDS = 180             # 3 min; please don't go much lower
