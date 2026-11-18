@@ -1,4 +1,4 @@
-name: KU seat watcher
+name: seat
 
 on:
   schedule:
