@@ -1,18 +1,5 @@
 #!/usr/bin/env python3
-"""
-KU Banner seat watcher (Khalifa University)
--------------------------------------------
-Checks seat counts for the CRNs below on a timer and sends a phone push
-notification (via the ntfy app) when someone drops and a seat frees up.
-No login needed: it reads the same public "Browse Classes" data you see.
 
-Setup:
-  1. pip install requests
-  2. Install the "ntfy" app (iOS / Android), tap "+", and subscribe to a
-     hard-to-guess topic name. Put that exact name in NTFY_TOPIC below.
-  3. Test:  python banner_seat_watcher.py --test
-  4. Run:   python banner_seat_watcher.py
-"""
 
 import re
 import sys
@@ -26,7 +13,7 @@ BANNER_BASE = "https://studentregistration.ku.ac.ae/StudentRegistrationSsb"
 TERM = "202620"          # Spring 2027
 
 # CRNs to watch. Add more like: ["20009", "20010"]
-CRNS = ["20009"]         # AERO 225-02 Mechanics of Solids
+CRNS = ["20009", "20001"]         # AERO 225-02 Mechanics of Solids
 
 NTFY_TOPIC = "s-ku-aero-8241"   # same topic you subscribe to in ntfy
 CHECK_EVERY_SECONDS = 180             # 3 min; please don't go much lower
