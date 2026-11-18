@@ -1,0 +1,14 @@
+name: Test alert
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python banner_seat_watcher.py --test
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
