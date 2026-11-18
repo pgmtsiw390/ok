@@ -32,7 +32,7 @@ jobs:
       - name: Watch seats for 55 minutes
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python banner_seat_watcher.py --minutes 55
+        run: python -u banner_seat_watcher.py --minutes 55
 
       - name: Save last seat counts
         if: always()
